@@ -6,18 +6,6 @@ using TMPro;
 
 public class Cat_Script : MonoBehaviour
 {
-    public enum cat_state
-    {
-        Default,
-        isSleeping,
-        isThirsty,
-        isPeeing,
-        isPooping,
-        isHungry,
-        isDirty,
-        isSick,
-    };
-
     [Header("States Bool")]
     public bool isSleeping;
     public bool isEating;
@@ -65,6 +53,16 @@ public class Cat_Script : MonoBehaviour
     public Button _peeButton;
     public Button _poopButton;
 
+    [Header("Parameter Texts")]
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI hungerText;
+    public TextMeshProUGUI thirstText;
+    public TextMeshProUGUI peeText;
+    public TextMeshProUGUI poopText;
+    public TextMeshProUGUI dirtText;
+    public TextMeshProUGUI happinessText;
+    public TextMeshProUGUI disciplineText;
+
     [Header("Misc")]
     public Transform _foodArea;
     public Transform _litterArea;
@@ -88,14 +86,26 @@ public class Cat_Script : MonoBehaviour
         Play();
         Cleanliness();
         Damage();
+        ParameterText();
     }
 
     void OnMouseDown()
     {
-        foreach(GameObject panel in _actionButtons)
+        if(_feedButton.gameObject.activeSelf == false)
         {
-            panel.SetActive(true);
+            foreach (GameObject panel in _actionButtons)
+            {
+                panel.SetActive(true);
+            }
         }
+        else
+        {
+            foreach (GameObject panel in _actionButtons)
+            {
+                panel.SetActive(false);
+            }
+        }
+        
     }
     private void Cat_States()
     {
@@ -202,7 +212,15 @@ public class Cat_Script : MonoBehaviour
         }
         else
         {
+            _disciplineCtr = 0;
+        }
+        if(_discipline < 0)
+        {
             _discipline = 0;
+        }
+        if(_discipline > 100)
+        {
+            _discipline = 100;
         }
     }
 
@@ -213,6 +231,18 @@ public class Cat_Script : MonoBehaviour
         play = false;
         pee = false;
         poop = false;
+    }
+
+    private void ParameterText()
+    {
+        healthText.text = $"Health: {_health}";
+        hungerText.text = $"Hunger: {_hunger}";
+        thirstText.text = $"Thirst: {_thirst}";
+        peeText.text = $"Pee: {_pee}";
+        poopText.text = $"Poop: {_poop}";
+        dirtText.text = $"Dirt: {_dirt}";
+        happinessText.text = $"Happiness: {_happiness}";
+        disciplineText.text = $"Discipline: {_discipline}";
     }
 
     #region Buttons
@@ -306,7 +336,15 @@ public class Cat_Script : MonoBehaviour
         {
             _hunger--;
             _hungerCtr = 0;
-        }        
+        }
+        if(_hunger < 0)
+        {
+            _hunger = 0;
+        }
+        if (_hunger > 100)
+        {
+            _hunger = 100;
+        }
     }
 
     public void Thirst()
@@ -317,6 +355,14 @@ public class Cat_Script : MonoBehaviour
         {
             _thirst++;
             _thirstCtr = 0;
+        }
+        if(_thirst < 0)
+        {
+            _thirst = 0;
+        }
+        if(_thirst > 100)
+        {
+            _thirst = 100;
         }
     }
 
@@ -342,6 +388,14 @@ public class Cat_Script : MonoBehaviour
             _playDisableCtr = 10;
         }
         Debug.Log($"Ctr = {_playDisableCtr}");
+        if (_happiness < 0)
+        {
+            _happiness = 0;
+        }
+        if(_happiness > 100)
+        {
+            _happiness = 100;
+        }
     }
 
     public void Pee()
@@ -357,6 +411,15 @@ public class Cat_Script : MonoBehaviour
         {
             Instantiate(_peeInstance, this.transform.position, Quaternion.identity);
             _pee = 0;
+        }
+
+        if(_pee < 0)
+        {
+            _pee = 0;
+        }
+        if(_pee > 100)
+        {
+            _pee = 100;
         }
     }
 
@@ -374,6 +437,14 @@ public class Cat_Script : MonoBehaviour
             Instantiate(_poopInstance, this.transform.position, Quaternion.identity);
             _poop = 0;
         }
+        if(_poop < 0)
+        {
+            _poop = 0;
+        }
+        if(_poop > 100)
+        {
+            _poop = 100;
+        }
     }
 
     public void Cleanliness()
@@ -384,6 +455,14 @@ public class Cat_Script : MonoBehaviour
         {
             _dirt++;
             _cleanCtr = 0;
+        }
+        if(_dirt < 0)
+        {
+            _dirt = 0;
+        }
+        if(_dirt > 100)
+        {
+            _dirt = 100;
         }
     }
 
@@ -399,6 +478,14 @@ public class Cat_Script : MonoBehaviour
             {
                 _health += Time.deltaTime;
             }
+        }
+        if(_health < 0)
+        {
+            _health = 0;
+        }
+        if(_health > 100)
+        {
+            _health = 100;
         }
     }
     #endregion
