@@ -43,7 +43,16 @@ public class Cat_Script : MonoBehaviour
     public float _cleanCtr = 0;
     public float _playCtr = 0;
     public float _playDisableCtr = 10f;
-    public float _disciplineCtr = 0;  
+    public float _disciplineCtr = 0;
+
+    [Header("Frequency of Parameters")]
+    public float _hungerF;
+    public float _thirstF;
+    public float _peeF;
+    public float _poopF;
+    public float _cleanF;
+    public float _playF;
+    public float _playDisableF;
 
     [Header("Buttons")]
     public Button _feedButton;
@@ -62,7 +71,7 @@ public class Cat_Script : MonoBehaviour
     public TextMeshProUGUI dirtText;
     public TextMeshProUGUI happinessText;
     public TextMeshProUGUI disciplineText;
-
+        
     [Header("Misc")]
     public Transform _foodArea;
     public Transform _litterArea;
@@ -332,7 +341,7 @@ public class Cat_Script : MonoBehaviour
     {
         _hungerCtr += Time.deltaTime;
         Debug.Log($"HungerCtr: {_hungerCtr}");
-        if (_hungerCtr > 5)
+        if (_hungerCtr > _hungerF)
         {
             _hunger--;
             _hungerCtr = 0;
@@ -351,7 +360,7 @@ public class Cat_Script : MonoBehaviour
     {
         _thirstCtr += Time.deltaTime;
         Debug.Log($"ThirstCtr: {_thirstCtr}");
-        if (_thirstCtr > 5)
+        if (_thirstCtr > _thirstF)
         {
             _thirst++;
             _thirstCtr = 0;
@@ -376,7 +385,7 @@ public class Cat_Script : MonoBehaviour
         if (_playCtr <= 0)
         {
             isPlaying = true;
-            _playCtr = 5;
+            _playCtr = _playF;
         }
         if(isPlaying == true)
         {
@@ -385,7 +394,7 @@ public class Cat_Script : MonoBehaviour
         if(_playDisableCtr <= 0)
         {
             isPlaying = false;
-            _playDisableCtr = 10;
+            _playDisableCtr = _playDisableF;
         }
         Debug.Log($"Ctr = {_playDisableCtr}");
         if (_happiness < 0)
@@ -402,7 +411,7 @@ public class Cat_Script : MonoBehaviour
     {
         _peeCtr += Time.deltaTime;
         Debug.Log($"PeeCtr: {_peeCtr}");
-        if (_peeCtr > 5)
+        if (_peeCtr > _peeF)
         {
             _pee++;
             _peeCtr = 0;
@@ -427,7 +436,7 @@ public class Cat_Script : MonoBehaviour
     {
         _poopCtr += Time.deltaTime;
         Debug.Log($"PoopCtr: {_poopCtr}");
-        if (_poopCtr > 5)
+        if (_poopCtr > _poopF)
         {
             _poop++;
             _poopCtr = 0;
@@ -451,7 +460,7 @@ public class Cat_Script : MonoBehaviour
     {
         _cleanCtr += Time.deltaTime;
         Debug.Log($"CleanCtr: {_cleanCtr}");
-        if (_cleanCtr > 5)
+        if (_cleanCtr > _cleanF)
         {
             _dirt++;
             _cleanCtr = 0;

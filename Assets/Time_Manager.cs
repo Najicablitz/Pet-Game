@@ -62,7 +62,7 @@ public class Time_Manager : MonoBehaviour
 
     public void Days()
     {
-        _days = Mathf.FloorToInt(_dayTime / _hoursInDay);
+        _days = 1 + Mathf.FloorToInt(_dayTime / _hoursInDay);
         _dayText.text = $"Day: {_days}";
     }
 }
