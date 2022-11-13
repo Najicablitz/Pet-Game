@@ -81,7 +81,13 @@ public class Cat_Script : MonoBehaviour
     public GameObject _poopInstance;
     public GameObject _peeInstance;
     public FeedArea_Script _feedArea;
+    public Time_Manager tm;
     [SerializeField] private List<GameObject> _actionButtons = new List<GameObject>();
+
+    private void Start()
+    {
+        tm = FindObjectOfType<Time_Manager>();
+    }
 
     void Update()
     {
@@ -113,8 +119,7 @@ public class Cat_Script : MonoBehaviour
             {
                 panel.SetActive(false);
             }
-        }
-        
+        }        
     }
     private void Cat_States()
     {
@@ -208,7 +213,7 @@ public class Cat_Script : MonoBehaviour
             this.transform.position = Vector2.MoveTowards(transform.position, _litterArea.position, _speed / 2);
             Invoke("EndAction", 3f);
         }
-        if (isSleeping == true)
+        if (isSleeping == true && feed == false && thirst == false && pee == false && poop == false)
         {
             this.transform.position = Vector2.MoveTowards(transform.position, _sleepArea.position, _speed / 2);
         }
@@ -362,7 +367,7 @@ public class Cat_Script : MonoBehaviour
         Debug.Log($"ThirstCtr: {_thirstCtr}");
         if (_thirstCtr > _thirstF)
         {
-            _thirst++;
+            _thirst--;
             _thirstCtr = 0;
         }
         if(_thirst < 0)

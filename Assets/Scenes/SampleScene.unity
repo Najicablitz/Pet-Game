@@ -292,12 +292,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96835541}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2222ebd16242a1440a77781bdeb5a0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dayDuration: 5
+  _dayDuration: 30
   _totalTime: 0
   _currentTime: 0
   _dayTime: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6993942033201720410}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b52a792c0ef0d140a57a318c97f668a, type: 3}
   m_Name: 
@@ -1384,6 +1384,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: _pee
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: _peeF
       value: 3
       objectReference: {fileID: 0}
@@ -1396,8 +1400,20 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: _speed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: _cleanF
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: _hunger
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: _thirst
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: peeText
@@ -1406,6 +1422,10 @@ PrefabInstance:
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: _hungerF
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: _playCtr
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: _thirstF
@@ -1427,6 +1447,10 @@ PrefabInstance:
       propertyPath: _foodArea
       value: 
       objectReference: {fileID: 2015596477}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: _peeButton
       value: 
@@ -1483,6 +1507,10 @@ PrefabInstance:
       propertyPath: disciplineText
       value: 
       objectReference: {fileID: 1232590602}
+    - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
+      propertyPath: _playDisableCtr
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6993942033273471378, guid: 7553499d17d9081499ffbf037bae4d2f, type: 3}
       propertyPath: _actionButtons.Array.data[0]
       value: 

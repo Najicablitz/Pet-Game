@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6993942033273471376}
   - component: {fileID: 6993942033273471379}
+  - component: {fileID: 7067558534330130135}
   - component: {fileID: 6993942033273471378}
   - component: {fileID: 6993942033273471389}
   - component: {fileID: 6993942033273471377}
@@ -90,7 +91,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6993942033273471378
+--- !u!114 &7067558534330130135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,6 +99,18 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6993942033273471388}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a135961c0a048e7448e44f56b2f6b939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6993942033273471378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993942033273471388}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b52a792c0ef0d140a57a318c97f668a, type: 3}
   m_Name: 
@@ -133,6 +146,13 @@ MonoBehaviour:
   _playCtr: 5
   _playDisableCtr: 20
   _disciplineCtr: 0
+  _hungerF: 0
+  _thirstF: 0
+  _peeF: 0
+  _poopF: 0
+  _cleanF: 0
+  _playF: 0
+  _playDisableF: 0
   _feedButton: {fileID: 0}
   _drinkButton: {fileID: 0}
   _batheButton: {fileID: 0}
@@ -155,6 +175,7 @@ MonoBehaviour:
   _poopInstance: {fileID: 7863829289308194133, guid: 5c7d6c52291ddea469d637781e203e02, type: 3}
   _peeInstance: {fileID: 4057594482818050461, guid: 79ac05bdcbce4e743bdbcf3c4ec2a46f, type: 3}
   _feedArea: {fileID: 0}
+  tm: {fileID: 0}
   _actionButtons:
   - {fileID: 0}
   - {fileID: 0}
