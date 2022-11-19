@@ -263,7 +263,7 @@ public class Cat_Script : MonoBehaviour
     public void FeedButton()
     {
         _hunger += 40;
-        _feedArea._feeds -= 40;
+        _feedArea.GetFeeds -= 40;
         foreach (GameObject panel in _actionButtons)
         {
             panel.SetActive(false);
@@ -278,7 +278,7 @@ public class Cat_Script : MonoBehaviour
     public void DrinkButton()
     {
         _thirst += 40;
-        _feedArea._water -= 40;
+        _feedArea.GetWater -= 40;
         foreach (GameObject panel in _actionButtons)
         {
             panel.SetActive(false);

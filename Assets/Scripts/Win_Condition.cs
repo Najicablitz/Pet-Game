@@ -6,13 +6,13 @@ using TMPro;
 public class Win_Condition : MonoBehaviour
 {
     private Time_Manager tm;
-    private Cat_Script cat;
+    private CatParameters cat;
     public TextMeshProUGUI text;
     public int _lastDay;
     void Start()
     {
         tm = FindObjectOfType<Time_Manager>();
-        cat = FindObjectOfType<Cat_Script>();
+        cat = FindObjectOfType<CatParameters>();
     }
 
     // Update is called once per frame

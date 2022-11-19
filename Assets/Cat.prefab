@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6993942033273471376}
   - component: {fileID: 6993942033273471379}
   - component: {fileID: 7067558534330130135}
+  - component: {fileID: 164621036990132095}
   - component: {fileID: 6993942033273471378}
   - component: {fileID: 6993942033273471389}
   - component: {fileID: 6993942033273471377}
@@ -101,6 +102,71 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a135961c0a048e7448e44f56b2f6b939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feed: 0
+  thirst: 0
+  bathe: 0
+  play: 0
+  pee: 0
+  poop: 0
+  _hunger: 50
+  _thirst: 50
+  _pee: 10
+  _poop: 10
+  _dirt: 5
+  _happiness: 0
+  _discipline: 0
+  _health: 0
+  _hungerCtr: 0
+  _thirstCtr: 0
+  _peeCtr: 0
+  _poopCtr: 0
+  _cleanCtr: 0
+  _playCtr: 0
+  _playDisableCtr: 10
+  _disciplineCtr: 0
+  _hungerF: 0
+  _thirstF: 0
+  _peeF: 0
+  _poopF: 0
+  _cleanF: 0
+  _playF: 0
+  _playDisableF: 0
+  _feedButton: {fileID: 0}
+  _drinkButton: {fileID: 0}
+  _batheButton: {fileID: 0}
+  _playButton: {fileID: 0}
+  _peeButton: {fileID: 0}
+  _poopButton: {fileID: 0}
+  healthText: {fileID: 0}
+  hungerText: {fileID: 0}
+  thirstText: {fileID: 0}
+  peeText: {fileID: 0}
+  poopText: {fileID: 0}
+  dirtText: {fileID: 0}
+  happinessText: {fileID: 0}
+  disciplineText: {fileID: 0}
+  _foodArea: {fileID: 0}
+  _litterArea: {fileID: 0}
+  _sleepArea: {fileID: 0}
+  _speed: 0
+  _stateText: {fileID: 0}
+  _poopInstance: {fileID: 0}
+  _peeInstance: {fileID: 0}
+  _feedArea: {fileID: 0}
+  tm: {fileID: 0}
+  _actionButtons: []
+--- !u!114 &164621036990132095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993942033273471388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7164dbf986aa97142b0a4ac1349c836c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6993942033273471378

@@ -5,11 +5,21 @@ using TMPro;
 
 public class LitterArea_Script : MonoBehaviour
 {
-    public float _fill = 100;
+    [SerializeField] private float _fill = 0;
     public GameObject _cleanButton;
     public TextMeshProUGUI litterText;
+
+    public float GetFill
+    {
+        get { return _fill; }
+        set { _fill = value; }
+    }
     private void Update()
     {
+        if(GetFill > 100)
+        {
+            GetFill = 100;
+        }
         litterText.text = $"Litter: {_fill}";
     }
     private void OnMouseDown()

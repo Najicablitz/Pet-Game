@@ -5,13 +5,25 @@ using TMPro;
 
 public class FeedArea_Script : MonoBehaviour
 {
-    public float _feeds;
-    public float _water;
+    [SerializeField] private float _feeds;
+    [SerializeField] private float _water;
     public GameObject _refillButton;
     public TextMeshProUGUI feedText;
+
+    public float GetFeeds
+    {
+        get { return _feeds; }
+        set { _feeds = value; }
+    }
+
+    public float GetWater
+    {
+        get { return _water; }
+        set { _water = value; }
+    }
     private void Update()
     {
-        feedText.text = $"Food: {_feeds} || Water: {_water}";
+        feedText.text = $"Food: {GetFeeds} || Water: {GetWater}";
     }
     private void OnMouseDown()
     {
@@ -27,8 +39,8 @@ public class FeedArea_Script : MonoBehaviour
 
     public void Refill()
     {
-        _water = 100;
-        _feeds = 100;
+        GetWater = 100;
+        GetFeeds = 100;
         _refillButton.SetActive(false);
     }
 }

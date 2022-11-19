@@ -22,7 +22,9 @@ public class Time_Manager : MonoBehaviour
         _currentTime = _totalTime % _dayDuration;
         _dayTime = _totalTime * _hoursInDay / _dayDuration;
         Days();
-        Debug.Log("Current Time: " + _currentTime);
+        //Debug.Log("Hour: " + Hour);
+        /*Debug.Log("Hour: " + GetHour());
+        Debug.Log("Minutes: " + GetMinutes());*/
     }
 
     public float GetHour()
@@ -64,5 +66,10 @@ public class Time_Manager : MonoBehaviour
     {
         _days = 1 + Mathf.FloorToInt(_dayTime / _hoursInDay);
         _dayText.text = $"Day: {_days}";
+    }
+
+    public float Hour
+    {
+        get {return GetHour(); }
     }
 }
