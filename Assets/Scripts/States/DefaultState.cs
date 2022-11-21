@@ -10,7 +10,7 @@ public class DefaultState : BaseState
     AnimatorScript animator;
     Direction direction;
 
-    private float _sleepCtr = 2f; 
+    private float _sleepCtr = 20f; 
     public override void Enter(CatStateManager cat)
     {
         Debug.Log("Default State");

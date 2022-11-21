@@ -1,2 +1,2 @@
-# Pet Game Prototype
+# Pet Game
  

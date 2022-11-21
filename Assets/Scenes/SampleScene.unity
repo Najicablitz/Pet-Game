@@ -3370,7 +3370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &606474901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3879,7 +3879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &766062237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7292,7 +7292,7 @@ GameObject:
   - component: {fileID: 1557020301}
   - component: {fileID: 1557020300}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Out of Bound Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7313,14 +7313,6 @@ MonoBehaviour:
   MainCamera: {fileID: 519420031}
   interasctions: {fileID: 378451086}
   checkPos: {fileID: 845176434}
-  buttons:
-  - {fileID: 766062238}
-  - {fileID: 1468489990}
-  - {fileID: 79656342}
-  - {fileID: 942209881}
-  - {fileID: 29956630}
-  - {fileID: 335556515}
-  - {fileID: 1752657070}
   right: {fileID: 565050175}
   left: {fileID: 1348053902}
 --- !u!4 &1557020301
@@ -9074,7 +9066,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362497927700564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7164dbf986aa97142b0a4ac1349c836c, type: 3}
   m_Name: 
@@ -9142,7 +9134,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362497927700564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a135961c0a048e7448e44f56b2f6b939, type: 3}
   m_Name: 
@@ -9154,7 +9146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362497927700564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1b8cdfb243552b43a93ae319f81e082, type: 3}
   m_Name: 
