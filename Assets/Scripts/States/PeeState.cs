@@ -6,6 +6,10 @@ public class PeeState : BaseState
 {
     CatParameters catParameter;
     LitterArea_Script litterArea;
+
+    AnimatorScript animator;
+    Direction direction;
+
     private float delayCtr = 3f;
     private bool peeing;
     private float disciplineCtr = 5f;
@@ -16,12 +20,17 @@ public class PeeState : BaseState
         litterArea = Object.FindObjectOfType<LitterArea_Script>();
         catParameter._peeButton.gameObject.SetActive(true);
         catParameter._peeButton.onClick.AddListener(Peeing);
+
+        animator = catParameter.gameObject.GetComponent<AnimatorScript>();
+        direction = Object.FindObjectOfType<Direction>();
     }
     public override void Exit(CatStateManager cat)
     {
         disciplineCtr = 5f;
         catParameter._peeButton.gameObject.SetActive(false);
         catParameter._peeButton.onClick.RemoveListener(Peeing);
+        animator.StopWalkAnim(false);
+        peeing = false;
     }
     public override void UpdateLogic(CatStateManager cat)
     {
@@ -41,18 +50,18 @@ public class PeeState : BaseState
             catParameter._pee = 0;
             cat.ChangeState(cat.defaultState);
         }
-        else if (litterArea.GetFill < 100)
+        else if(litterArea.GetFill < 100)
         {
             if (catParameter._pee >= 100 && catParameter._discipline >= 50 || peeing == true)
             {
+                var dir = direction.GetAngle(catParameter._litterArea.transform);
+                animator.PlayWalkAnim(dir);
                 cat.transform.position = Vector2.MoveTowards(
                                          cat.transform.position, catParameter._litterArea.position, catParameter._speed / 2);
 
                 delayCtr -= Time.deltaTime;
                 if (delayCtr <= 0)
-                {
-                    catParameter._pee = 0;
-                    peeing = false;
+                {                    
                     delayCtr = 3f;
                     cat.ChangeState(cat.defaultState);
                 }
@@ -64,11 +73,11 @@ public class PeeState : BaseState
     {
         
     }
-
     private void Peeing()
     {
         peeing = true;
         litterArea.GetFill += 40;
+        catParameter._pee = 0;
         catParameter._peeButton.gameObject.SetActive(false);
         if (disciplineCtr > 0)
         {

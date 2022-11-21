@@ -112,7 +112,6 @@ public class AnimatorScript : MonoBehaviour
         }
 		else
 		{
-			Debug.Log("Test");
 			amt.SetFloat("dirX", -1);
 			amt.SetFloat("dirY", 0);
 		}

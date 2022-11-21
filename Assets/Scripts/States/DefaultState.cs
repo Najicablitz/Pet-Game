@@ -10,7 +10,7 @@ public class DefaultState : BaseState
     AnimatorScript animator;
     Direction direction;
 
-    private float _sleepCtr = 5f; 
+    private float _sleepCtr = 2f; 
     public override void Enter(CatStateManager cat)
     {
         Debug.Log("Default State");
@@ -19,16 +19,31 @@ public class DefaultState : BaseState
 
         animator = catParameter.gameObject.GetComponent<AnimatorScript>();
         direction = Object.FindObjectOfType<Direction>();
+
+        //animator.amt.SetTrigger("idle");
     }
     public override void Exit(CatStateManager cat)
     {
         catParameter._batheButton.gameObject.SetActive(false);
         catParameter._playButton.gameObject.SetActive(false);
         catParameter._cureButton.gameObject.SetActive(false);
+        animator.amt.SetBool("play", false);
+        animator.StopWalkAnim(false);
     }
     public override void UpdateLogic(CatStateManager cat)
     {
-        cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._sleepArea.transform.position, catParameter._speed / 2);
+        var centerAreaPos =  catParameter._centerArea.transform.position;        
+        if(cat.transform.position != centerAreaPos)
+        {
+            animator.PlayWalkAnim(direction.GetAngle(catParameter._sleepArea.transform));
+        }
+        else
+        {
+            animator.StopWalkAnim(false);
+        }
+        cat.transform.position = Vector2.MoveTowards(cat.transform.position, centerAreaPos, catParameter._speed / 2);
+
+
         if (catParameter._hunger <= 20 || (time.Hour > 6 && time.Hour < 7))
         {
             cat.ChangeState(cat.hungerState);
@@ -47,7 +62,6 @@ public class DefaultState : BaseState
         }
         if(cat.currentState == cat.defaultState)
         {
-            //animator.DefaultAnim();
             if (catParameter._dirt >= 80)
             {
                 catParameter._batheButton.gameObject.SetActive(true);
@@ -58,17 +72,19 @@ public class DefaultState : BaseState
             }
             if (catParameter.isPlaying == true)
             {
+                animator.amt.SetBool("play", true);
                 catParameter._playButton.gameObject.SetActive(true);
             }
             else
             {
+                animator.amt.SetBool("play", false);
                 catParameter._playButton.gameObject.SetActive(false);
             }
             if (catParameter.isSick == true)
             {
                 catParameter._cureButton.gameObject.SetActive(true);
             }
-            //_sleepCtr -= Time.deltaTime;
+            _sleepCtr -= Time.deltaTime;
             if(_sleepCtr <= 0)
             {
                 cat.ChangeState(cat.sleepState);
@@ -82,5 +98,5 @@ public class DefaultState : BaseState
         throw new System.NotImplementedException();
     }
 
-    
+
 }

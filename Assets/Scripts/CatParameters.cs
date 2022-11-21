@@ -68,6 +68,7 @@ public class CatParameters : MonoBehaviour
     public Transform _foodArea;
     public Transform _litterArea;
     public Transform _sleepArea;
+    public Transform _centerArea;
     public float _speed;
     public TMP_Text _stateText;
     public GameObject _poopInstance;

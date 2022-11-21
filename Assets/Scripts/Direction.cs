@@ -21,7 +21,7 @@ public class Direction : MonoBehaviour
     {
         var direction = target.position - this.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
+        //Debug.Log(angle);
         return angle;        
     }
 }

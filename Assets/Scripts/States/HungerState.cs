@@ -11,6 +11,7 @@ public class HungerState : BaseState
 
     AnimatorScript animator;
     Direction direction;
+    AudioManager audioManager;
 
     private float delayCtr = 3f;
     private float disciplineCtr = 5f;
@@ -25,6 +26,8 @@ public class HungerState : BaseState
 
         animator = catParameter.gameObject.GetComponent<AnimatorScript>();
         direction = Object.FindObjectOfType<Direction>();
+        audioManager = Object.FindObjectOfType<AudioManager>();
+        audioManager.PlayPurr();
 
         catParameter._feedButton.gameObject.SetActive(true);
         catParameter._feedButton.onClick.AddListener(Eating);
@@ -34,7 +37,7 @@ public class HungerState : BaseState
         disciplineCtr = 5f;
         catParameter._feedButton.gameObject.SetActive(false);
         catParameter._feedButton.onClick.RemoveListener(Eating);
-        animator.StopWalkAnim(false);
+        eating = false;
     }
     public override void UpdateLogic(CatStateManager cat)
     {
@@ -55,7 +58,6 @@ public class HungerState : BaseState
             delayCtr -= Time.deltaTime;
             if (delayCtr <= 0)
             {
-                eating = false;
                 delayCtr = 3f;
                 cat.ChangeState(cat.defaultState);
             }

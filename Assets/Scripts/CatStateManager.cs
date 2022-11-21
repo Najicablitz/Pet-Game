@@ -14,8 +14,7 @@ public class CatStateManager : MonoBehaviour
     public SleepState sleepState = new SleepState();
     public PlayState playState = new PlayState();
     public SickState sickState = new SickState();
-
-    
+        
     void Start()
     {
         currentState = defaultState;
@@ -34,5 +33,19 @@ public class CatStateManager : MonoBehaviour
         currentState.Exit(this);
         currentState = state;
         state.Enter(this);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Feeds")
+        {
+            Debug.Log("Hit Feeds");
+            ChangeState(defaultState);
+        }
+        if (collision.tag == "Litter")
+        {
+            Debug.Log("Hit Litter");
+            ChangeState(defaultState);
+        }
     }
 }
