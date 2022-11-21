@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class RenderScript : MonoBehaviour
+public class OutOfBoundsCheck : MonoBehaviour
 {
     public Camera MainCamera;
     public Canvas interasctions;
