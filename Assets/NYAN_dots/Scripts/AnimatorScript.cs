@@ -110,12 +110,12 @@ public class AnimatorScript : MonoBehaviour
 			amt.SetFloat("dirX", 0);
             amt.SetFloat("dirY", -1);
         }
-		else
-		{
-			amt.SetFloat("dirX", -1);
-			amt.SetFloat("dirY", 0);
-		}
-	}
+        else
+        {
+            amt.SetFloat("dirX", -1);
+            amt.SetFloat("dirY", 0);
+        }
+    }
 		
 	public void StopWalkAnim(bool stop)
 	{

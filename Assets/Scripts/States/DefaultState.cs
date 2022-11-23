@@ -19,8 +19,6 @@ public class DefaultState : BaseState
 
         animator = catParameter.gameObject.GetComponent<AnimatorScript>();
         direction = Object.FindObjectOfType<Direction>();
-
-        //animator.amt.SetTrigger("idle");
     }
     public override void Exit(CatStateManager cat)
     {
@@ -35,7 +33,7 @@ public class DefaultState : BaseState
         var centerAreaPos =  catParameter._centerArea.transform.position;        
         if(cat.transform.position != centerAreaPos)
         {
-            animator.PlayWalkAnim(direction.GetAngle(catParameter._sleepArea.transform));
+            animator.PlayWalkAnim(direction.GetAngle(catParameter._centerArea.transform));
         }
         else
         {

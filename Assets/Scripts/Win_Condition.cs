@@ -7,8 +7,9 @@ public class Win_Condition : MonoBehaviour
 {
     private Time_Manager tm;
     private CatParameters cat;
-    public TextMeshProUGUI text;
-    public int _lastDay;
+    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField]private int _lastDay;
     void Start()
     {
         tm = FindObjectOfType<Time_Manager>();
@@ -29,6 +30,7 @@ public class Win_Condition : MonoBehaviour
             {
                 text.gameObject.SetActive(true);
                 text.text = "Congratulation";
+                _gameManager.Load_Post_Game();
             }
         }
     }

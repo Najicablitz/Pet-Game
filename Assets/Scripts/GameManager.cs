@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public void Load_Post_Game()
     {
 
-        SceneManager.LoadScene("Post-Game");
+        SceneManager.LoadScene("EndScene");
     }
 
     public void Exit()
