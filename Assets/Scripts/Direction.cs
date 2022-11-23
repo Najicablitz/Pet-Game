@@ -24,4 +24,12 @@ public class Direction : MonoBehaviour
         //Debug.Log(angle);
         return angle;        
     }
+
+    public float GetAngle(Vector3 target)
+    {
+        var direction = target - this.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //Debug.Log(angle);
+        return angle;
+    }
 }
