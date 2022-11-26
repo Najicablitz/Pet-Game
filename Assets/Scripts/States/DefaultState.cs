@@ -5,6 +5,7 @@ using UnityEngine;
 public class DefaultState : BaseState
 {
     CatParameters catParameter;
+    PlayDrag playDrag;
     Time_Manager time;
 
     AnimatorScript animator;
@@ -12,6 +13,8 @@ public class DefaultState : BaseState
 
     Vector3 random;
     bool randomAssign;
+    bool roam;
+    bool onetime;
 
     private float _sleepCtr = 20f;
     private float _roamCtr = 5f;
@@ -25,6 +28,7 @@ public class DefaultState : BaseState
         direction = Object.FindObjectOfType<Direction>();
         random = Vector3.zero;
         randomAssign = false;
+        onetime = false;
     }
     public override void Exit(CatStateManager cat)
     {
@@ -34,31 +38,32 @@ public class DefaultState : BaseState
         animator.amt.SetBool("play", false);
         animator.StopWalkAnim(false);
     }
+
     public override void UpdateLogic(CatStateManager cat)
     {
-        /*var centerAreaPos =  catParameter._centerArea.transform.position;        
-        if(cat.transform.position != centerAreaPos)
-        {
-            animator.PlayWalkAnim(direction.GetAngle(catParameter._centerArea.transform));
-        }
-        else
-        {
-            animator.StopWalkAnim(false);
-        }
-        cat.transform.position = Vector2.MoveTowards(cat.transform.position, centerAreaPos, catParameter._speed / 2);*/
-        if (_roamCtr <= 0) {
+        if (_roamCtr <= 0 && catParameter.isPlaying == false) {
+            roam = true;
             if(randomAssign == false)
             {
-                random = Random.insideUnitCircle * 5;
-                randomAssign = true;
+                random = Random.insideUnitCircle * 3;
+                if (random.y > 0.8 || random.x > 6.8)
+                {
+                    Debug.Log("Border");
+
+                    random = Random.insideUnitCircle * 3;
+                }
+                else 
+                {
+                    randomAssign = true;
+                }
             }
             RoamAI();
         }
         else
         {
             _roamCtr -= Time.deltaTime;
+            roam = false;
         }
-        Debug.Log("Roam Ctr: " + _roamCtr + "|| random: " + random);
         if (catParameter._hunger <= 20 || (time.Hour > 6 && time.Hour < 7))
         {
             cat.ChangeState(cat.hungerState);
@@ -75,7 +80,7 @@ public class DefaultState : BaseState
         {
             cat.ChangeState(cat.pooState);
         }
-        if(cat.currentState == cat.defaultState)
+        if(cat.currentState == cat.defaultState && cat.dragging == false)
         {
             if (catParameter._dirt >= 80)
             {
@@ -88,7 +93,11 @@ public class DefaultState : BaseState
             if (catParameter.isPlaying == true)
             {
                 animator.amt.SetBool("play", true);
-                catParameter._playButton.gameObject.SetActive(true);
+                if(onetime == false)
+                {
+                    catParameter._playButton.gameObject.SetActive(true);
+                    onetime = true;
+                }
             }
             else
             {
@@ -115,10 +124,15 @@ public class DefaultState : BaseState
 
     private void RoamAI()
     {
-        if(random != Vector3.zero)
+        if (roam == true)
         {
             animator.PlayWalkAnim(direction.GetAngle(random));
             catParameter.transform.position = Vector2.MoveTowards(catParameter.transform.position, random, catParameter._speed / 2);
+        }
+        else
+        {
+            animator.StopWalkAnim(false);
+            catParameter.transform.position = Vector3.zero;
         }
         if(catParameter.transform.position == random)
         {
@@ -126,6 +140,7 @@ public class DefaultState : BaseState
             random = Vector3.zero;
             _roamCtr = 5;
             randomAssign = false;
+            roam = false;
         }
     }
 

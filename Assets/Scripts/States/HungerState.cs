@@ -16,6 +16,7 @@ public class HungerState : BaseState
     private float delayCtr = 3f;
     private float disciplineCtr = 5f;
     private bool eating;
+    private bool onetime;
     public override void Enter(CatStateManager cat)
     {
         Debug.Log("Hunger State");
@@ -29,32 +30,49 @@ public class HungerState : BaseState
         audioManager = Object.FindObjectOfType<AudioManager>();
         audioManager.PlayPurr();
 
-        catParameter._feedButton.gameObject.SetActive(true);
-        catParameter._feedButton.onClick.AddListener(Eating);
+        catParameter._feedAction.gameObject.SetActive(true);
+        //catParameter._feedAction.onClick.AddListener(Eating);
+        onetime = false;
     }
     public override void Exit(CatStateManager cat)
     {
         disciplineCtr = 5f;
-        catParameter._feedButton.gameObject.SetActive(false);
-        catParameter._feedButton.onClick.RemoveListener(Eating);
+        catParameter._feedAction.gameObject.SetActive(false);
+        //catParameter._feedAction.onClick.RemoveListener(Eating);
+        animator.StopWalkAnim(false);
         eating = false;
     }
     public override void UpdateLogic(CatStateManager cat)
     {
+        if (cat.GetFeeds() == true)
+        {
+            if (onetime == false)
+            {
+                Eating();
+                onetime = true;
+            }
+        }
         disciplineCtr -= Time.deltaTime;
-        if (feedArea.GetFeeds < 40)
+        /*if (feedArea.GetFeeds < 40)
         {
             catParameter._feedButton.interactable = false;
         }
         else
         {
             catParameter._feedButton.interactable = true;
-        }
+        }*/
         if(eating == true)
         {
-            var dir = direction.GetAngle(catParameter._foodArea.transform);
-            animator.PlayWalkAnim(dir);
-            cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._foodArea.transform.position, catParameter._speed / 2);
+            if (Vector2.Distance(cat.transform.position, catParameter._foodArea.position) > 3)
+            {
+                var dir = direction.GetAngle(catParameter._foodArea.transform);
+                animator.PlayWalkAnim(dir);
+                cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._foodArea.transform.position, catParameter._speed / 2);
+            }
+            else
+            {
+                animator.StopWalkAnim(false);
+            }
             delayCtr -= Time.deltaTime;
             if (delayCtr <= 0)
             {
@@ -78,7 +96,7 @@ public class HungerState : BaseState
         currency.GetCurrency -= 20;
         feedArea.GetFeeds -= 40;
         eating = true;
-        catParameter._feedButton.gameObject.SetActive(false);
+        catParameter._feedAction.gameObject.SetActive(false);
         if (disciplineCtr > 0)
         {
             catParameter._discipline += 5;

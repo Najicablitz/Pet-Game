@@ -11,13 +11,15 @@ public class ThirstState : BaseState
 
     AnimatorScript animator;
     Direction direction;
+    AudioManager audioManager;
 
     private float delayCtr = 3f;
     private float disciplineCtr = 5f;
     private bool drinking;
+    private bool onetime;
     public override void Enter(CatStateManager cat)
     {
-        Debug.Log("Hunger State");
+        Debug.Log("Thirst State");
         catParameter = Object.FindObjectOfType<CatParameters>();
         currency = Object.FindObjectOfType<Currency_Script>();
         feedArea = Object.FindObjectOfType<FeedArea_Script>();
@@ -25,34 +27,52 @@ public class ThirstState : BaseState
 
         animator = catParameter.gameObject.GetComponent<AnimatorScript>();
         direction = Object.FindObjectOfType<Direction>();
+        audioManager = Object.FindObjectOfType<AudioManager>();
+        audioManager.PlayPurr();
 
-        catParameter._drinkButton.gameObject.SetActive(true);
-        catParameter._drinkButton.onClick.AddListener(Drinking);
+        catParameter._drinkAction.gameObject.SetActive(true);
+        //catParameter._drinkAction.onClick.AddListener(Drinking);
+        onetime = false;
     }
     public override void Exit(CatStateManager cat)
     {
         disciplineCtr = 5f;
-        catParameter._drinkButton.gameObject.SetActive(false);
-        catParameter._drinkButton.onClick.RemoveListener(Drinking);
+        catParameter._drinkAction.gameObject.SetActive(false);
+        //catParameter._drinkAction.onClick.RemoveListener(Drinking);
         animator.StopWalkAnim(false);
         drinking = false;
     }
     public override void UpdateLogic(CatStateManager cat)
     {
+        if (cat.GetFeeds() == true)
+        {
+            if (onetime == false)
+            {
+                Drinking();
+                onetime = true;
+            }
+        }
         disciplineCtr -= Time.deltaTime;
-        if (feedArea.GetWater < 40)
+        /*if (feedArea.GetWater < 40)
         {
             catParameter._drinkButton.interactable = false;
         }
         else
         {
             catParameter._drinkButton.interactable = true;
-        }
+        }*/
         if (drinking == true)
         {
-            var dir = direction.GetAngle(catParameter._foodArea.transform);
-            animator.PlayWalkAnim(dir);
-            cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._foodArea.transform.position, catParameter._speed / 2);
+            if (Vector2.Distance(cat.transform.position, catParameter._foodArea.position) > 3)
+            {
+                var dir = direction.GetAngle(catParameter._foodArea.transform);
+                animator.PlayWalkAnim(dir);
+                cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._foodArea.transform.position, catParameter._speed / 2);
+            }
+            else
+            {
+                animator.StopWalkAnim(false);
+            }            
             delayCtr -= Time.deltaTime;
             if (delayCtr <= 0)
             {
@@ -76,7 +96,7 @@ public class ThirstState : BaseState
         currency.GetCurrency -= 20;
         feedArea.GetWater -= 40;
         drinking = true;
-        catParameter._drinkButton.gameObject.SetActive(false);
+        catParameter._drinkAction.gameObject.SetActive(false);
         if (disciplineCtr > 0)
         {
             catParameter._discipline += 5;

@@ -13,6 +13,7 @@ public class CatParameters : MonoBehaviour
     public bool play;
     public bool pee;
     public bool poop;
+    public bool playState;
 
     [Header("Parameters")]
     public float _hunger = 50;
@@ -46,13 +47,14 @@ public class CatParameters : MonoBehaviour
     public float _playF;
     public float _playDisableF;
 
-    [Header("Buttons")]
-    public Button _feedButton;
-    public Button _drinkButton;
+    [Header("Interactions")]
+    public Image _feedAction;
+    public Image _drinkAction;
     public Button _batheButton;
+    public GameObject _playAction;
     public Button _playButton;
-    public Button _peeButton;
-    public Button _poopButton;
+    public Image _peeButton;
+    public Image _poopButton;
     public Button _cureButton;
 
     [Header("Parameter Texts")]
@@ -76,6 +78,7 @@ public class CatParameters : MonoBehaviour
     public Time_Manager tm;
     private CatStateManager catState;
     [SerializeField] private Slider _healthSlider;
+    public Slider _playSlider;
 
     void Start()
     {
@@ -99,7 +102,7 @@ public class CatParameters : MonoBehaviour
     private void Awake()
     {
         _batheButton.onClick.AddListener(Bathing);
-        _playButton.onClick.AddListener(Playing);
+        //_playAction.onClick.AddListener(Playing);
         _cureButton.onClick.AddListener(Cure);
     }
 
@@ -155,7 +158,7 @@ public class CatParameters : MonoBehaviour
 
     public void Play()
     {
-        if(catState.currentState == catState.defaultState)
+        if(catState.currentState == catState.defaultState && playState == false)
         {
             if (isPlaying == false)
             {
@@ -295,11 +298,19 @@ public class CatParameters : MonoBehaviour
         _dirt = 0;
         _batheButton.gameObject.SetActive(false);
     }
-    private void Playing()
+    public void PlayState()
+    {
+        _playButton.gameObject.SetActive(false);
+        _playAction.gameObject.SetActive(true);
+        _playSlider.gameObject.SetActive(true);
+    }
+    public void Playing()
     {
         _happiness += 5;
         isPlaying = false;
-        _playButton.gameObject.SetActive(false);
+        playState = false;
+        _playAction.gameObject.SetActive(false);
+        _playSlider.gameObject.SetActive(false);
     }
 
     private void Cure()
