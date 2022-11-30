@@ -40,7 +40,7 @@ public class SleepState : BaseState
             animator.StopWalkAnim(false);
             animator.amt.SetBool("sleep", true);            
         }
-        cat.transform.position = Vector2.MoveTowards(cat.transform.position, sleepAreaPos, catParameter._speed / 2);
+        cat.transform.position = Vector2.MoveTowards(cat.transform.position, sleepAreaPos, catParameter._speed * Time.deltaTime);
 
         if (ctr <= 0)
         {

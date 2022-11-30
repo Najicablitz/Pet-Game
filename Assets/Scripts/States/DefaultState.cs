@@ -41,7 +41,7 @@ public class DefaultState : BaseState
 
     public override void UpdateLogic(CatStateManager cat)
     {
-        if (_roamCtr <= 0 && catParameter.isPlaying == false) {
+        if (_roamCtr <= 0 && catParameter.playState == false) {
             roam = true;
             if(randomAssign == false)
             {
@@ -127,7 +127,7 @@ public class DefaultState : BaseState
         if (roam == true)
         {
             animator.PlayWalkAnim(direction.GetAngle(random));
-            catParameter.transform.position = Vector2.MoveTowards(catParameter.transform.position, random, catParameter._speed / 2);
+            catParameter.transform.position = Vector2.MoveTowards(catParameter.transform.position, random, catParameter._speed * Time.deltaTime);
         }
         else
         {

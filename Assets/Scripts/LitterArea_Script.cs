@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class LitterArea_Script : MonoBehaviour
 {
     [SerializeField] private float _fill = 0;
     public GameObject _cleanButton;
-    public TextMeshProUGUI litterText;
-
+    public Slider amount;
+    private void OnMouseOver()
+    {
+        amount.gameObject.SetActive(true);
+    }
+    private void OnMouseExit()
+    {
+        amount.gameObject.SetActive(false);
+    }
     public float GetFill
     {
         get { return _fill; }
@@ -20,7 +28,7 @@ public class LitterArea_Script : MonoBehaviour
         {
             GetFill = 100;
         }
-        litterText.text = $"Litter: {_fill}";
+        amount.value = _fill;
     }
     private void OnMouseDown()
     {

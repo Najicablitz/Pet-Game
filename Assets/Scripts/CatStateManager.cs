@@ -17,10 +17,13 @@ public class CatStateManager : MonoBehaviour
 
     CatParameters catParameters;
     AnimatorScript animator;
+    AudioManager audioManager;
     public bool dragging;
     private bool feeds;
     private bool litter;
-
+    [SerializeField] private AudioClip clip;
+    [SerializeField] private AudioSource source;
+    private CurrentDay currentDay;
     public bool GetFeeds()
     {
         return feeds;
@@ -35,20 +38,26 @@ public class CatStateManager : MonoBehaviour
         catParameters = FindObjectOfType<CatParameters>();
         animator = FindObjectOfType<AnimatorScript>();
         currentState = defaultState;
-        currentState.Enter(this);        
+        currentState.Enter(this);
+        currentDay = FindObjectOfType<CurrentDay>();
+        audioManager = FindObjectOfType<AudioManager>();
+        source = audioManager._sound;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log("Current State: " + currentState);
-        currentState.UpdateLogic(this);
-        if (dragging == true)
+        if(currentDay.pause == false)
         {
-            Debug.Log("Dragging");
-            var pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = pos;
-        }
+            currentState.UpdateLogic(this);
+            if (dragging == true)
+            {
+                Debug.Log("Dragging");
+                var pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = pos;
+            }
+        }        
     }
 
     public void ChangeState(BaseState state)
@@ -76,6 +85,7 @@ public class CatStateManager : MonoBehaviour
     {
         dragging = true;
         animator.amt.SetBool("grab", true);
+        audioManager.PlayClip(clip, source);
     }
 
     private void OnMouseUp()

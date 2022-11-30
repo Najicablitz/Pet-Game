@@ -5,7 +5,6 @@ using UnityEngine;
 public class HungerState : BaseState
 {
     CatParameters catParameter;
-    Currency_Script currency;
     FeedArea_Script feedArea;
     Time_Manager time;
 
@@ -21,7 +20,6 @@ public class HungerState : BaseState
     {
         Debug.Log("Hunger State");
         catParameter = Object.FindObjectOfType<CatParameters>();
-        currency = Object.FindObjectOfType<Currency_Script>();
         feedArea = Object.FindObjectOfType<FeedArea_Script>();
         time = Object.FindObjectOfType<Time_Manager>();
 
@@ -49,6 +47,7 @@ public class HungerState : BaseState
             if (onetime == false)
             {
                 Eating();
+                audioManager.PlayEat();
                 onetime = true;
             }
         }
@@ -67,7 +66,7 @@ public class HungerState : BaseState
             {
                 var dir = direction.GetAngle(catParameter._foodArea.transform);
                 animator.PlayWalkAnim(dir);
-                cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._foodArea.transform.position, catParameter._speed / 2);
+                cat.transform.position = Vector2.MoveTowards(cat.transform.position, catParameter._foodArea.transform.position, catParameter._speed * Time.deltaTime);
             }
             else
             {
@@ -92,14 +91,16 @@ public class HungerState : BaseState
 
     private void Eating()
     {
-        catParameter._hunger += 40;
-        currency.GetCurrency -= 20;
-        feedArea.GetFeeds -= 40;
-        eating = true;
-        catParameter._feedAction.gameObject.SetActive(false);
-        if (disciplineCtr > 0)
+        if(feedArea.GetFeeds >= 40)
         {
-            catParameter._discipline += 5;
-        }
+            catParameter._hunger += 40;
+            feedArea.GetFeeds -= 40;
+            eating = true;
+            catParameter._feedAction.gameObject.SetActive(false);
+            if (disciplineCtr > 0)
+            {
+                catParameter._discipline += 5;
+            }
+        }       
     }
 }

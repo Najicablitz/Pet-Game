@@ -19,7 +19,7 @@ public class PlayDrag : MonoBehaviour
     void Update()
     {
         transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(playValue);
+        //Debug.Log(playValue);
         playSlider.value = playValue;
         if(playValue >= 100)
         {

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Destroy_Litter : MonoBehaviour
 {
+    AudioManager audioManager;
+    private void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     private void OnMouseDown()
     {
-        Destroy(this);
+        Debug.Log("Destroy");
+        Destroy(this.gameObject);
     }
 }

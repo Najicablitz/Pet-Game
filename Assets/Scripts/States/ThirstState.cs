@@ -49,6 +49,7 @@ public class ThirstState : BaseState
             if (onetime == false)
             {
                 Drinking();
+                audioManager.PlayDrink();
                 onetime = true;
             }
         }
@@ -92,14 +93,18 @@ public class ThirstState : BaseState
 
     private void Drinking()
     {
-        catParameter._thirst += 40;
-        currency.GetCurrency -= 20;
-        feedArea.GetWater -= 40;
-        drinking = true;
-        catParameter._drinkAction.gameObject.SetActive(false);
-        if (disciplineCtr > 0)
+        if(feedArea.GetWater >= 40) 
         {
-            catParameter._discipline += 5;
+            catParameter._thirst += 40;
+            currency.GetCurrency -= 20;
+            feedArea.GetWater -= 40;
+            drinking = true;
+            catParameter._drinkAction.gameObject.SetActive(false);
+            if (disciplineCtr > 0)
+            {
+                catParameter._discipline += 5;
+            }
         }
+        
     }
 }

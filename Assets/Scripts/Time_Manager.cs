@@ -14,14 +14,22 @@ public class Time_Manager : MonoBehaviour
     public float _dayTime;
     public int _days;
     public TextMeshProUGUI _dayText;
-
+    private CurrentDay currentDay;
+    private void Start()
+    {
+        currentDay = FindObjectOfType<CurrentDay>();
+    }
     // Update is called once per frame
     void Update()
     {
-        _totalTime += Time.deltaTime;
-        _currentTime = _totalTime % _dayDuration;
-        _dayTime = _totalTime * _hoursInDay / _dayDuration;
-        Days();
+        if(currentDay.pause == false)
+        {
+            _totalTime += Time.deltaTime;
+            _currentTime = _totalTime % _dayDuration;
+            _dayTime = _totalTime * _hoursInDay / _dayDuration;
+            Days();
+        }
+        
         //Debug.Log("Hour: " + Hour);
         /*Debug.Log("Hour: " + GetHour());
         Debug.Log("Minutes: " + GetMinutes());*/

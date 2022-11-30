@@ -8,6 +8,7 @@ public class PooState : BaseState
     LitterArea_Script litterArea;
 
     AnimatorScript animator;
+    AudioManager audioManager;
     Direction direction;
 
     private float delayCtr = 3f;
@@ -20,6 +21,7 @@ public class PooState : BaseState
         catParameter = Object.FindObjectOfType<CatParameters>();
         litterArea = Object.FindObjectOfType<LitterArea_Script>();
         catParameter._poopButton.gameObject.SetActive(true);
+        audioManager = Object.FindObjectOfType<AudioManager>();
         //catParameter._poopButton.onClick.AddListener(Pooping);
 
         animator = catParameter.gameObject.GetComponent<AnimatorScript>();
@@ -41,6 +43,7 @@ public class PooState : BaseState
             if (onetime == false)
             {
                 Pooping();
+                audioManager.PlayPoop();
                 onetime = true;
             }
         }
@@ -57,6 +60,7 @@ public class PooState : BaseState
         {
             GameObject instanceObj = Object.Instantiate(catParameter._poopInstance,
                                     catParameter.gameObject.transform.position, Quaternion.identity) as GameObject;
+            audioManager.PlayPoop();
             catParameter._poop = 0;
             cat.ChangeState(cat.defaultState);
         }
@@ -69,7 +73,7 @@ public class PooState : BaseState
                     var dir = direction.GetAngle(catParameter._litterArea.transform);
                     animator.PlayWalkAnim(dir);
                     cat.transform.position = Vector2.MoveTowards(
-                                             cat.transform.position, catParameter._litterArea.position, catParameter._speed / 2);
+                                             cat.transform.position, catParameter._litterArea.position, catParameter._speed * Time.deltaTime);
                 }
                 else
                 {
@@ -91,14 +95,18 @@ public class PooState : BaseState
     }
     private void Pooping()
     {
-        Debug.Log("Pooping");
-        pooping = true;        
-        litterArea.GetFill += 40;
-        catParameter._poop = 0;
-        catParameter._poopButton.gameObject.SetActive(false);
-        if (disciplineCtr > 0)
+        if (litterArea.GetFill < 100)
         {
-            catParameter._discipline += 5;
+            Debug.Log("Pooping");
+            pooping = true;
+            litterArea.GetFill += 40;
+            catParameter._poop = 0;
+            catParameter._poopButton.gameObject.SetActive(false);
+            if (disciplineCtr > 0)
+            {
+                catParameter._discipline += 5;
+            }
         }
+            
     }
 }

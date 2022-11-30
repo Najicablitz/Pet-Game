@@ -79,24 +79,29 @@ public class CatParameters : MonoBehaviour
     private CatStateManager catState;
     [SerializeField] private Slider _healthSlider;
     public Slider _playSlider;
+    private CurrentDay currentDay;
 
     void Start()
     {
         catState = FindObjectOfType<CatStateManager>();
+        currentDay = FindObjectOfType<CurrentDay>();
     }
 
     void Update()
     {
-        Hunger();
-        Thirst();
-        Pee();
-        Poop();
-        Play();
-        Cleanliness();
-        Damage();
-        ParameterText();
+        if(currentDay.pause == false)
+        {
+            Hunger();
+            Thirst();
+            Pee();
+            Poop();
+            Play();
+            Cleanliness();
+            Damage();
+            
 
-        _healthSlider.value = _health;
+            _healthSlider.value = _health;
+        }   
     }
 
     private void Awake()
@@ -106,7 +111,7 @@ public class CatParameters : MonoBehaviour
         _cureButton.onClick.AddListener(Cure);
     }
 
-    private void ParameterText()
+    /*private void ParameterText()
     {
         hungerText.text = $"Hunger: {_hunger}";
         thirstText.text = $"Thirst: {_thirst}";
@@ -115,7 +120,7 @@ public class CatParameters : MonoBehaviour
         dirtText.text = $"Dirt: {_dirt}";
         happinessText.text = $"Happiness: {_happiness}";
         disciplineText.text = $"Discipline: {_discipline}";
-    }
+    }*/
 
     #region Parameters
     public void Hunger()
@@ -303,6 +308,7 @@ public class CatParameters : MonoBehaviour
         _playButton.gameObject.SetActive(false);
         _playAction.gameObject.SetActive(true);
         _playSlider.gameObject.SetActive(true);
+        playState = true;
     }
     public void Playing()
     {
