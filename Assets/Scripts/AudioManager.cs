@@ -5,8 +5,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    [SerializeField] private AudioSource _purrSound, _sleepSound, _washSound, _background;
-    public AudioSource _sound;
+    [SerializeField] private AudioSource _btnSound, _purrSound, _sleepSound, _washSound, _background;
+    public AudioSource  SFX, BG;
     [SerializeField] private AudioClip _purrClip, _eatClip, _drinkClip, _poopClip, _peeClip, _refillClip, _cleanClip;
     private void Awake()
     {
@@ -23,27 +23,27 @@ public class AudioManager : MonoBehaviour
 
     public void PlayEat()
     {
-        _sound.PlayOneShot(_eatClip);
+        SFX.PlayOneShot(_eatClip);
     }
     public void PlayDrink()
     {
-        _sound.PlayOneShot(_drinkClip);
+        SFX.PlayOneShot(_drinkClip);
     }
     public void PlayPoop()
     {
-        _sound.PlayOneShot(_poopClip);
+        SFX.PlayOneShot(_poopClip);
     }
     public void PlayPee()
     {
-        _sound.PlayOneShot(_peeClip);
+        SFX.PlayOneShot(_peeClip);
     }
     public void PlayRefill()
     {
-        _sound.PlayOneShot(_refillClip);
+        SFX.PlayOneShot(_refillClip);
     }
     public void PlayClean()
     {
-        _sound.PlayOneShot(_cleanClip);
+        SFX.PlayOneShot(_cleanClip);
     }
     public void PlayPurr()
     {

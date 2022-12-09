@@ -80,11 +80,16 @@ public class CatParameters : MonoBehaviour
     [SerializeField] private Slider _healthSlider;
     public Slider _playSlider;
     private CurrentDay currentDay;
-
+    private AudioManager audioManager;
+    private SpriteRenderer sprite;
+    private AnimatorScript animatorScript;
     void Start()
     {
         catState = FindObjectOfType<CatStateManager>();
         currentDay = FindObjectOfType<CurrentDay>();
+        audioManager = FindObjectOfType<AudioManager>();
+        sprite = this.GetComponent<SpriteRenderer>();
+        animatorScript = FindObjectOfType<AnimatorScript>();
     }
 
     void Update()
@@ -98,8 +103,15 @@ public class CatParameters : MonoBehaviour
             Play();
             Cleanliness();
             Damage();
-            
-
+            ParameterText();
+            if (isSick == true)
+            {
+                sprite.color = Color.green;
+            }
+            else
+            {
+                sprite.color = new Color(255, 255, 255);
+            }
             _healthSlider.value = _health;
         }   
     }
@@ -111,7 +123,7 @@ public class CatParameters : MonoBehaviour
         _cureButton.onClick.AddListener(Cure);
     }
 
-    /*private void ParameterText()
+    private void ParameterText()
     {
         hungerText.text = $"Hunger: {_hunger}";
         thirstText.text = $"Thirst: {_thirst}";
@@ -120,7 +132,7 @@ public class CatParameters : MonoBehaviour
         dirtText.text = $"Dirt: {_dirt}";
         happinessText.text = $"Happiness: {_happiness}";
         disciplineText.text = $"Discipline: {_discipline}";
-    }*/
+    }
 
     #region Parameters
     public void Hunger()
@@ -271,6 +283,7 @@ public class CatParameters : MonoBehaviour
         if(_sickCtr <= 0)
         {
             isSick = true;
+        
         }
     }
 
@@ -302,6 +315,16 @@ public class CatParameters : MonoBehaviour
     {
         _dirt = 0;
         _batheButton.gameObject.SetActive(false);
+        audioManager.PlayWash();
+        bathe = true;
+        animatorScript.amt.SetBool("bath", true);
+        Invoke("StopBathe", 4);
+    }
+
+    public void StopBathe()
+    {
+        bathe = false;
+        animatorScript.amt.SetBool("bath", false);
     }
     public void PlayState()
     {

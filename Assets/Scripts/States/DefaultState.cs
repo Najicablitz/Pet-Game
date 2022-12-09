@@ -9,6 +9,7 @@ public class DefaultState : BaseState
     Time_Manager time;
 
     AnimatorScript animator;
+    AudioManager audioManager;
     Direction direction;
 
     Vector3 random;
@@ -25,10 +26,13 @@ public class DefaultState : BaseState
         time = Object.FindObjectOfType<Time_Manager>();
 
         animator = catParameter.gameObject.GetComponent<AnimatorScript>();
+        animator.amt.SetBool("sleep", false);
+        audioManager = Object.FindObjectOfType<AudioManager>();
         direction = Object.FindObjectOfType<Direction>();
         random = Vector3.zero;
         randomAssign = false;
         onetime = false;
+        _roamCtr = Random.Range(5, 8);
     }
     public override void Exit(CatStateManager cat)
     {
@@ -41,7 +45,8 @@ public class DefaultState : BaseState
 
     public override void UpdateLogic(CatStateManager cat)
     {
-        if (_roamCtr <= 0 && catParameter.playState == false) {
+
+        if (_roamCtr <= 0 && catParameter.playState == false && catParameter.bathe == false) {
             roam = true;
             if(randomAssign == false)
             {
@@ -59,11 +64,13 @@ public class DefaultState : BaseState
             }
             RoamAI();
         }
-        else
+        else if(catParameter.playState == false && catParameter.bathe == false)
         {
             _roamCtr -= Time.deltaTime;
             roam = false;
         }
+
+        #region Change States
         if (catParameter._hunger <= 20 || (time.Hour > 6 && time.Hour < 7))
         {
             cat.ChangeState(cat.hungerState);
@@ -80,39 +87,49 @@ public class DefaultState : BaseState
         {
             cat.ChangeState(cat.pooState);
         }
-        if(cat.currentState == cat.defaultState && cat.dragging == false)
+        #endregion
+
+        if (cat.currentState == cat.defaultState && cat.dragging == false)
         {
-            if (catParameter._dirt >= 80)
+            if (catParameter._dirt >= 80 && catParameter.playState == false)
             {
                 catParameter._batheButton.gameObject.SetActive(true);
             }
-            else if (catParameter._dirt < 80)
+            else if (catParameter._dirt < 80 || catParameter.playState == true)
             {
                 catParameter._batheButton.gameObject.SetActive(false);
             }
-            if (catParameter.isPlaying == true)
+            if (catParameter.isPlaying == true && catParameter.bathe == false)
             {
                 animator.amt.SetBool("play", true);
-                if(onetime == false)
-                {
+                /*if(onetime == false)
+                {*/
                     catParameter._playButton.gameObject.SetActive(true);
-                    onetime = true;
-                }
+                /*    onetime = true;
+                }*/
             }
             else
             {
                 animator.amt.SetBool("play", false);
                 catParameter._playButton.gameObject.SetActive(false);
             }
-            if (catParameter.isSick == true)
+            if (catParameter.isSick == true && catParameter.playState == false && catParameter.bathe == false)
             {
                 catParameter._cureButton.gameObject.SetActive(true);
             }
-            _sleepCtr -= Time.deltaTime;
-            if(_sleepCtr <= 0)
+            else
+            {
+                catParameter._cureButton.gameObject.SetActive(false);
+            }
+            if(catParameter.playState == false && catParameter.bathe == false)
+            {
+                _sleepCtr -= Time.deltaTime;
+
+            }
+            if (_sleepCtr <= 0)
             {
                 cat.ChangeState(cat.sleepState);
-                _sleepCtr = 5f;
+                _sleepCtr = Random.Range(5,10);
             }
         }
        
@@ -143,5 +160,4 @@ public class DefaultState : BaseState
             roam = false;
         }
     }
-
 }

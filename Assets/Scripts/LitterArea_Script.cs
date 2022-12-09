@@ -9,9 +9,17 @@ public class LitterArea_Script : MonoBehaviour
     [SerializeField] private float _fill = 0;
     public GameObject _cleanButton;
     public Slider amount;
+    private CurrentDay currentDay;
+    private void Start()
+    {
+        currentDay = FindObjectOfType<CurrentDay>();
+    }
     private void OnMouseOver()
     {
-        amount.gameObject.SetActive(true);
+        if(currentDay.pause == false)
+        {
+            amount.gameObject.SetActive(true);
+        }
     }
     private void OnMouseExit()
     {

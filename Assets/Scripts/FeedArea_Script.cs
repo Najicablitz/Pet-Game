@@ -11,10 +11,18 @@ public class FeedArea_Script : MonoBehaviour
     public GameObject _refillButton;
     public Slider feedsAmount;
     public Slider waterAmount;
+    private CurrentDay currentDay;
+    private void Start()
+    {
+        currentDay = FindObjectOfType<CurrentDay>();
+    }
     private void OnMouseOver()
     {
-        feedsAmount.gameObject.SetActive(true);
-        waterAmount.gameObject.SetActive(true);
+        if(currentDay.pause == false) 
+        {
+            feedsAmount.gameObject.SetActive(true);
+            waterAmount.gameObject.SetActive(true);
+        }        
     }
     private void OnMouseExit()
     {

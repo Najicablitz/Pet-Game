@@ -41,7 +41,7 @@ public class CatStateManager : MonoBehaviour
         currentState.Enter(this);
         currentDay = FindObjectOfType<CurrentDay>();
         audioManager = FindObjectOfType<AudioManager>();
-        source = audioManager._sound;
+        source = audioManager.SFX;
     }
 
     // Update is called once per frame
@@ -83,9 +83,12 @@ public class CatStateManager : MonoBehaviour
 
     private void OnMouseDown()
     {
-        dragging = true;
-        animator.amt.SetBool("grab", true);
-        audioManager.PlayClip(clip, source);
+        if(currentState != sleepState)
+        {
+            dragging = true;
+            animator.amt.SetBool("grab", true);
+            audioManager.PlayClip(clip, source);
+        }        
     }
 
     private void OnMouseUp()
