@@ -1698,6 +1698,7 @@ MonoBehaviour:
   feedArea: {fileID: 0}
   litterArea: {fileID: 0}
   tm: {fileID: 0}
+  load: 0
 --- !u!4 &714281705
 Transform:
   m_ObjectHideFlags: 0
