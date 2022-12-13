@@ -10,13 +10,15 @@ public class LitterArea_Script : MonoBehaviour
     public GameObject _cleanButton;
     public Slider amount;
     private CurrentDay currentDay;
+    [SerializeField] private GameObject feedMiniGame;
+    [SerializeField] private GameObject litterMiniGame;
     private void Start()
     {
         currentDay = FindObjectOfType<CurrentDay>();
     }
     private void OnMouseOver()
     {
-        if(currentDay.pause == false)
+        if(currentDay.pause == false && feedMiniGame.activeSelf == false && litterMiniGame.activeSelf == false)
         {
             amount.gameObject.SetActive(true);
         }
@@ -40,7 +42,7 @@ public class LitterArea_Script : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (_cleanButton.gameObject.activeSelf==false)
+        if (_cleanButton.gameObject.activeSelf==false && currentDay.pause == false && feedMiniGame.activeSelf == false && litterMiniGame.activeSelf == false)
         {
             _cleanButton.SetActive(true);
         }

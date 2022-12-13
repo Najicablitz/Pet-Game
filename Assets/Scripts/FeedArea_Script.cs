@@ -12,13 +12,15 @@ public class FeedArea_Script : MonoBehaviour
     public Slider feedsAmount;
     public Slider waterAmount;
     private CurrentDay currentDay;
+    [SerializeField] private GameObject feedMiniGame;
+    [SerializeField] private GameObject litterMiniGame;
     private void Start()
     {
         currentDay = FindObjectOfType<CurrentDay>();
     }
     private void OnMouseOver()
     {
-        if(currentDay.pause == false) 
+        if(currentDay.pause == false && feedMiniGame.activeSelf == false && litterMiniGame.activeSelf == false) 
         {
             feedsAmount.gameObject.SetActive(true);
             waterAmount.gameObject.SetActive(true);
@@ -55,7 +57,7 @@ public class FeedArea_Script : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if(_refillButton.gameObject.activeSelf == false)
+        if(_refillButton.gameObject.activeSelf == false && currentDay.pause == false && feedMiniGame.activeSelf == false && litterMiniGame.activeSelf == false)
         {
             _refillButton.SetActive(true);
         }

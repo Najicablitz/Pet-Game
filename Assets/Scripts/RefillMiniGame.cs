@@ -11,8 +11,8 @@ public class RefillMiniGame : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = true;
-        float xPos = Random.Range(0, Screen.width);
-        float yPos = Random.Range(0, Screen.height);
+        float xPos = Random.Range(1, Screen.width-1);
+        float yPos = Random.Range(1, Screen.height-1);
         transform.position = new Vector2(xPos, yPos);
     }
     public void OnBeginDrag(PointerEventData eventData)

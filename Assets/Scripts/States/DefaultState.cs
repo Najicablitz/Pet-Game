@@ -102,11 +102,11 @@ public class DefaultState : BaseState
             if (catParameter.isPlaying == true && catParameter.bathe == false)
             {
                 animator.amt.SetBool("play", true);
-                /*if(onetime == false)
-                {*/
+                if (onetime == false)
+                {
                     catParameter._playButton.gameObject.SetActive(true);
-                /*    onetime = true;
-                }*/
+                    onetime = true;
+                }
             }
             else
             {

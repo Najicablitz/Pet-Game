@@ -332,9 +332,11 @@ public class CatParameters : MonoBehaviour
         _playAction.gameObject.SetActive(true);
         _playSlider.gameObject.SetActive(true);
         playState = true;
+        Cursor.visible = false;
     }
     public void Playing()
     {
+        Cursor.visible = true;
         _happiness += 5;
         isPlaying = false;
         playState = false;
