@@ -10,16 +10,12 @@ public class LoadMenu : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        button.onClick.AddListener(Load_MainMenu);
+        button.onClick.AddListener(MainMenu);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MainMenu()
     {
-    }
-    private void Load_MainMenu()
-    {
-        gameManager.Save();
+        button.onClick.RemoveListener(MainMenu);
         gameManager.Load_Menu();
     }
 }

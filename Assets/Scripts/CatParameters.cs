@@ -28,24 +28,24 @@ public class CatParameters : MonoBehaviour
     public bool isSick;
 
     [Header("Counters")]
-    public float _hungerCtr = 0;
-    public float _thirstCtr = 0;
-    public float _peeCtr = 0;
-    public float _poopCtr = 0;
-    public float _cleanCtr = 0;
-    public float _playCtr = 0;
-    public float _playDisableCtr = 10f;
-    public float _disciplineCtr = 0;
-    public float _sickCtr = 100;
+    private float _hungerCtr = 0;
+    private float _thirstCtr = 0;
+    private float _peeCtr = 0;
+    private float _poopCtr = 0;
+    private float _cleanCtr = 0;
+    private float _playCtr = 0;
+    private float _playDisableCtr = 10f;
+    public float _disciplineCtr  { get; private set;}
+    private float _sickCtr = 100;
 
     [Header("Frequency of Parameters")]
-    public float _hungerF;
-    public float _thirstF;
-    public float _peeF;
-    public float _poopF;
-    public float _cleanF;
-    public float _playF;
-    public float _playDisableF;
+    [SerializeField] private float _hungerF;
+    [SerializeField] private float _thirstF;
+    [SerializeField] private float _peeF;
+    [SerializeField] private float _poopF;
+    [SerializeField] private float _cleanF;
+    [SerializeField] private float _playF;
+    [SerializeField] private float _playDisableF;
 
     [Header("Interactions")]
     public Image _feedAction;
@@ -240,11 +240,6 @@ public class CatParameters : MonoBehaviour
             _poop++;
             _poopCtr = 0;
         }
-        if (_poop >= 100 && _discipline < 50)
-        {
-            Instantiate(_poopInstance, this.transform.position, Quaternion.identity);
-            _poop = 0;
-        }
         if (_poop < 0)
         {
             _poop = 0;
@@ -334,7 +329,7 @@ public class CatParameters : MonoBehaviour
         playState = true;
         Cursor.visible = false;
     }
-    public void Playing()
+    public void StopPlaying()
     {
         Cursor.visible = true;
         _happiness += 5;
@@ -344,9 +339,10 @@ public class CatParameters : MonoBehaviour
         _playSlider.gameObject.SetActive(false);
     }
 
-    private void Cure()
+    public void Cure()
     {
         _cureButton.gameObject.SetActive(false);
         isSick = false;
+        _sickCtr = 100;
     }
 }

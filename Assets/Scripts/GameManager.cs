@@ -112,6 +112,11 @@ public class GameManager : MonoBehaviour
     public void Load_Post_Game()
     {
 
+        SceneManager.LoadScene("WinScene");
+    }
+    public void Load_Loss_Game()
+    {
+
         SceneManager.LoadScene("EndScene");
     }
 

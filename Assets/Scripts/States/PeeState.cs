@@ -57,11 +57,12 @@ public class PeeState : BaseState
         {
             catParameter._peeButton.interactable = true;
         }*/
-        if (catParameter._pee > 99 && catParameter._discipline < 50 && peeing == false)
+        if (catParameter._pee >= 100 && catParameter._discipline < 50 && peeing == false)
         {
             GameObject instanceObj = Object.Instantiate(catParameter._peeInstance,
                                     catParameter.gameObject.transform.position, Quaternion.identity) as GameObject;
             audioManager.PlayPee();
+            catParameter._discipline -= 5;
             catParameter._pee = 0;
             cat.ChangeState(cat.defaultState);
         }

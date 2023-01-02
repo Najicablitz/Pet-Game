@@ -71,9 +71,10 @@ public class AudioManager : MonoBehaviour
     {
         _background.Play();
     }
-    public void PlayBackground(AudioSource bg)
+    public void PlayBackground(AudioClip bg)
     {
-        bg.Play();
+        _background.clip = bg;
+        _background.Play();
     }
     public void PlayClip(AudioClip clip, AudioSource source)
     {

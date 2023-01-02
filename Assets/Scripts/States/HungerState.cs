@@ -60,7 +60,7 @@ public class HungerState : BaseState
         {
             catParameter._feedButton.interactable = true;
         }*/
-        if(eating == true)
+        if (eating == true)
         {
             if (Vector2.Distance(cat.transform.position, catParameter._foodArea.position) > 3)
             {
@@ -79,7 +79,7 @@ public class HungerState : BaseState
                 cat.ChangeState(cat.defaultState);
             }
         }
-        if(catParameter._hunger > 20 && time.Hour > 7)
+        if (catParameter._hunger > 20 && time.Hour > 7)
         {
             cat.ChangeState(cat.defaultState);
         }

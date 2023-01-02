@@ -45,7 +45,8 @@ public class DefaultState : BaseState
 
     public override void UpdateLogic(CatStateManager cat)
     {
-
+        Debug.Log("Roam: "+roam);
+        Debug.Log("Play: " + catParameter.isPlaying);
         if (_roamCtr <= 0 && catParameter.playState == false && catParameter.bathe == false) {
             roam = true;
             if(randomAssign == false)
@@ -54,7 +55,6 @@ public class DefaultState : BaseState
                 if (random.y > 0.8 || random.x > 6.8)
                 {
                     Debug.Log("Border");
-
                     random = Random.insideUnitCircle * 3;
                 }
                 else 
@@ -71,19 +71,19 @@ public class DefaultState : BaseState
         }
 
         #region Change States
-        if (catParameter._hunger <= 20 || (time.Hour > 6 && time.Hour < 7))
+        if ((catParameter._hunger <= 20 || (time.Hour > 6 && time.Hour < 7)) && catParameter.playState != true)
         {
             cat.ChangeState(cat.hungerState);
         }
-        if (catParameter._thirst <= 20)
+        if (catParameter._thirst <= 20 && catParameter.playState != true)
         {
             cat.ChangeState(cat.thirstState);
         }
-        if (catParameter._pee >= 80)
+        if (catParameter._pee >= 80 && catParameter.playState != true)
         {
             cat.ChangeState(cat.peeState);
         }
-        if (catParameter._poop >= 80)
+        if (catParameter._poop >= 80 && catParameter.playState != true)
         {
             cat.ChangeState(cat.pooState);
         }
@@ -91,15 +91,15 @@ public class DefaultState : BaseState
 
         if (cat.currentState == cat.defaultState && cat.dragging == false)
         {
-            if (catParameter._dirt >= 80 && catParameter.playState == false)
+            if (catParameter._dirt >= 80 && catParameter.playState == false && roam == false)
             {
                 catParameter._batheButton.gameObject.SetActive(true);
             }
-            else if (catParameter._dirt < 80 || catParameter.playState == true)
+            else if (catParameter._dirt < 80 || catParameter.playState == true || roam == true)
             {
                 catParameter._batheButton.gameObject.SetActive(false);
             }
-            if (catParameter.isPlaying == true && catParameter.bathe == false)
+            if (catParameter.isPlaying == true && catParameter.bathe == false && roam == false && catParameter.isSick == false)
             {
                 animator.amt.SetBool("play", true);
                 if (onetime == false)
@@ -110,6 +110,7 @@ public class DefaultState : BaseState
             }
             else
             {
+                onetime = false;
                 animator.amt.SetBool("play", false);
                 catParameter._playButton.gameObject.SetActive(false);
             }
@@ -124,7 +125,6 @@ public class DefaultState : BaseState
             if(catParameter.playState == false && catParameter.bathe == false)
             {
                 _sleepCtr -= Time.deltaTime;
-
             }
             if (_sleepCtr <= 0)
             {
@@ -149,6 +149,7 @@ public class DefaultState : BaseState
         else
         {
             animator.StopWalkAnim(false);
+            roam = false;
             catParameter.transform.position = Vector3.zero;
         }
         if(catParameter.transform.position == random)

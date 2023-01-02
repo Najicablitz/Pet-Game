@@ -58,9 +58,10 @@ public class PooState : BaseState
         }*/
         if (catParameter._poop >= 100 && catParameter._discipline < 50 && pooping == false)
         {
-            GameObject instanceObj = Object.Instantiate(catParameter._poopInstance,
+            GameObject instanceObj = GameObject.Instantiate(catParameter._poopInstance,
                                     catParameter.gameObject.transform.position, Quaternion.identity) as GameObject;
             audioManager.PlayPoop();
+            catParameter._discipline -= 5;
             catParameter._poop = 0;
             cat.ChangeState(cat.defaultState);
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Destroy_Litter : MonoBehaviour
 {
     AudioManager audioManager;
-    private void Start()
+    private void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
     }

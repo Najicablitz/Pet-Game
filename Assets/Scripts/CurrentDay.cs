@@ -41,6 +41,7 @@ public class CurrentDay : MonoBehaviour
                     _currentday = tm._days;
                     ctr = 3;
                     pause = false;
+                    gameManager.Save();
                 }
             }
         }        

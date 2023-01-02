@@ -5,7 +5,6 @@ using UnityEngine;
 public class ThirstState : BaseState
 {
     CatParameters catParameter;
-    Currency_Script currency;
     FeedArea_Script feedArea;
     Time_Manager time;
 
@@ -21,7 +20,6 @@ public class ThirstState : BaseState
     {
         Debug.Log("Thirst State");
         catParameter = Object.FindObjectOfType<CatParameters>();
-        currency = Object.FindObjectOfType<Currency_Script>();
         feedArea = Object.FindObjectOfType<FeedArea_Script>();
         time = Object.FindObjectOfType<Time_Manager>();
 
@@ -96,7 +94,6 @@ public class ThirstState : BaseState
         if(feedArea.GetWater >= 40) 
         {
             catParameter._thirst += 40;
-            currency.GetCurrency -= 20;
             feedArea.GetWater -= 40;
             drinking = true;
             catParameter._drinkAction.gameObject.SetActive(false);

@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayBackground : MonoBehaviour
 {
     private AudioManager audioManager;
+    [SerializeField] private AudioClip clip;    
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        audioManager.PlayBackground();
+        audioManager.PlayBackground(clip);
     }
 
     // Update is called once per frame
@@ -16,4 +17,5 @@ public class PlayBackground : MonoBehaviour
     {
         
     }
+    
 }

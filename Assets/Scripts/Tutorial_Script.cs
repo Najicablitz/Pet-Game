@@ -27,7 +27,6 @@ public class Tutorial_Script : MonoBehaviour
             if (gameObject.activeSelf && tutorial == true)
             {
                 currentDay.pause = true;
-                tutorial = false;
                 textBubble.SetActive(true);
             }
         }
@@ -36,6 +35,7 @@ public class Tutorial_Script : MonoBehaviour
 
     public void CloseTutorial()
     {
+        tutorial = false;
         textBubble.SetActive(false);
         currentDay.pause = false;
     }
